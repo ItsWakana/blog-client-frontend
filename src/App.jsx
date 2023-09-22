@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-
+import BlogList from "./components/BlogList";
 function App() {
 
   // "username": "jimmyjames2", "password": "jimmy167"
-  useEffect(() => {
+
+  //SET SOME STATE FOR THE POSTS. WE COULD ALSO MAKE A HOOK HERE INSTEAD.
 
     // const getAuthToken = async () => {
     //   const response = await fetch("http://localhost:3000/api/sign-in", {
@@ -21,8 +21,9 @@ function App() {
     //FOR NOW WE CAN LEAVE CORS OPEN, UNTIL THIS GOES INTO PRODUCTION.
 
 
-  },[])
-  return <h1>Hello World!</h1>
+  return (
+    <BlogList />
+  )
 }
 
 export default App;
