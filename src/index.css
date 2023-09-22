@@ -1,9 +1,13 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  box-sizing: border-box;
   background-color: var(--background-clr);
   margin: 0;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --background-clr: rgb(24, 24, 24);
   --primary-clr: rgb(39, 39, 39);
@@ -25,16 +29,21 @@ ul {
   margin-bottom: 20px;
 }
 
-.nav-bar button {
+.nav-link {
+  display: inline-block;
+}
+
+.nav-bar button,
+.nav-bar .nav-link {
   background: none;
   color: white;
   font-weight: bold;
-  border: none;
   padding: 20px 25px;
   cursor: pointer;
 }
 
-.nav-bar button:hover {
+.nav-bar button:hover,
+.nav-bar .nav-link:hover {
   background-color: var(--card-border-clr);
 }
 
@@ -43,13 +52,18 @@ ul {
   color: white;
 }
 
+.main-blog {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 ul.blog-list {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
-  width: 100%;
+  width: 70%;
 }
 
 .blog-list__post {
@@ -58,7 +72,7 @@ ul.blog-list {
   border: solid 2px var(--card-border-clr);
   padding: 25px;
   width: 10%;
-  height: 130px;
+  height: 200px;
   min-width: 250px;
   flex: 1;
   color: white;
@@ -81,4 +95,85 @@ ul.blog-list {
   font-weight: bold;
   cursor: pointer;
   border: none;
+}
+
+.blog-post__button:hover {
+  background-color: rgb(255, 185, 56);
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  width: 25%;
+  min-width: 230px;
+}
+
+.sign-up-form > div {
+  position: relative;
+}
+
+.sign-up-form > p {
+  color: white;
+}
+
+.sign-up-form a {
+  color: var(--secondary-clr);
+}
+
+.sign-up-form > div label {
+  position: absolute;
+  top: 3px;
+  font-size: .7rem;
+  padding-left: 5px;
+  color: gray;
+}
+
+form input,
+form textarea {
+  padding: 15px 12px 10px 5px;
+  border-radius: 5px;
+  border: solid 2px rgb(77, 76, 83);
+  background-color: rgb(67, 66, 73);
+  color: white;
+  width: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  background: rgb(67, 66, 73);
+}
+
+input:focus,
+textarea:focus {
+  outline: solid 2px var(--secondary-clr);
+}
+
+.sign-up-form button,
+button {
+  border-radius: 20px;
+  border: none;
+  background: var(--secondary-clr);
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+}
+
+button a {
+  text-decoration: none;
+  color: white;
 }

@@ -7,11 +7,13 @@ const BlogList = () => {
     
     return (
         !isLoading ? (
-            <ul className="blog-list">
-                {blogPosts.map((post) => (
-                    <BlogPostCard key={post._id} post={post}/>
-                ))}
-            </ul>
+            <div className="main-blog">
+                <ul className="blog-list">
+                    {blogPosts.map((post) => (
+                        <BlogPostCard key={post._id} post={post}/>
+                    ))}
+                </ul>
+            </div>
         ) : (
             <p>Loading...</p>
         )

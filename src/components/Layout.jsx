@@ -1,14 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 const Layout = () => {
 
     return (
         <>
             <ul className="nav-bar">
-                <li><button>Home</button></li>
                 <li>
-                    <button><a href="">Login</a></button>
-                    <button><a href="">About</a></button>
+                    <Link className="nav-link" to="/">Home</Link>
+                </li>
+                <li>
+                    <Link className="nav-link" to="/login">Login</Link>
+                    <Link className="nav-link" to="/">About</Link>
+                    {/* <button><a href="">About</a></button> */}
+
                 </li>
             </ul>
         <Outlet />
