@@ -4,13 +4,13 @@ const Layout = () => {
 
     return (
         <>
-        <div className="epic-header">
-            <ul>
-                <li>Home</li>
-                <li>Login</li>
-                <li>About</li>
+            <ul className="nav-bar">
+                <li><button>Home</button></li>
+                <li>
+                    <button><a href="">Login</a></button>
+                    <button><a href="">About</a></button>
+                </li>
             </ul>
-        </div>
         <Outlet />
         </>
     )
