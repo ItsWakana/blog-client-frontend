@@ -1,19 +1,20 @@
 import { useState } from "react";
 
-const Login = ({ handleLoginClick }) => {
+const Login = ({ validateLogin }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
-        handleLoginClick(username, password);
+
+        validateLogin(username, password);
     }
     return (
         <>
         <h1>Sign in</h1>
         <div className="form-wrapper">
-            <form onSubmit={handleSubmit} className="sign-up-form" action="/sign-in" method="POST">
+            <form onSubmit={handleClick} className="sign-up-form" action="/sign-in" method="POST">
                 <div>
                     <label htmlFor="username">Username</label>
                     <input name="username" type="text" value={username}

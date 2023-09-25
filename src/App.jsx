@@ -1,6 +1,39 @@
 import BlogList from "./components/BlogList";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/Layout";
+import Login from "./components/Login";
+
 function App() {
 
+
+  const validateLogin = async (username, password) => {
+    const response = await fetch("http://localhost:3000/api/sign-in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password})
+    });
+
+    const token = await response.json();
+    console.log(token);
+  }
+
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <BlogList />
+        },
+        {
+          path: "/login",
+          element: <Login validateLogin={validateLogin}/>
+        }
+      ]
+    }
+  ]);
   // "username": "jimmyjames2", "password": "jimmy167"
 
   //SET SOME STATE FOR THE POSTS. WE COULD ALSO MAKE A HOOK HERE INSTEAD.
@@ -22,7 +55,8 @@ function App() {
 
 
   return (
-    <BlogList />
+    <RouterProvider router={router}/>
+
   )
 }
 

@@ -11,8 +11,6 @@ const Layout = () => {
                 <li>
                     <Link className="nav-link" to="/login">Login</Link>
                     <Link className="nav-link" to="/">About</Link>
-                    {/* <button><a href="">About</a></button> */}
-
                 </li>
             </ul>
         <Outlet />
