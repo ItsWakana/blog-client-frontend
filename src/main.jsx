@@ -6,16 +6,14 @@ import Login from './components/Login.jsx'
 import Layout from './components/Layout.jsx'
 import './index.css'
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//   },
-//   {
-//     path: "/login",
-//     element: <Login />
-//   }
-// ]);
+const handleLoginClick = (username, password) => {
+
+  console.log(username);
+  console.log(password);
+  
+
+  
+}
 
 const router = createBrowserRouter([
   {
@@ -27,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Login handleLoginClick={handleLoginClick}/>
       }
     ]
   }
