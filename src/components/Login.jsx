@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ validateLogin }) => {
+const Login = ({ validateLogin, isLoggedIn }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/");
+        }
+    },[isLoggedIn, navigate]);
+    
     const handleClick = (e) => {
         e.preventDefault();
 
+        if (!username || !password) {
+            console.log("Invalid login")
+            return;
+        }
         validateLogin(username, password);
     }
+
     return (
         <>
         <h1>Sign in</h1>

@@ -1,10 +1,14 @@
 import BlogList from "./components/BlogList";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
+import { useState } from "react";
+import BlogPostPage from "./components/BlogPostPage";
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const validateLogin = async (username, password) => {
     const response = await fetch("http://localhost:3000/api/sign-in", {
@@ -15,8 +19,26 @@ function App() {
       body: JSON.stringify({ username, password})
     });
 
-    const token = await response.json();
-    console.log(token);
+    if (response.status !== 200) {
+      console.log("invalid login");
+      return;
+    }
+    const { token } = await response.json();
+
+    const userResponse = await fetch("http://localhost:3000/api/me", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (response.status !== 200) {
+      console.log(`Error code:${response.status}. Issue logging in`);
+    }
+    const { user } = await userResponse.json();
+    setCurrentUser(user);
+    setIsLoggedIn(true);
+    console.log(user);
   }
 
   const router = createBrowserRouter([
@@ -25,11 +47,15 @@ function App() {
       children: [
         {
           path: "/",
-          element: <BlogList />
+          element: <BlogList currentUser={currentUser} isLoggedIn={isLoggedIn}/>
         },
         {
           path: "/login",
-          element: <Login validateLogin={validateLogin}/>
+          element: <Login validateLogin={validateLogin} isLoggedIn={isLoggedIn}/>
+        },
+        {
+          path: "/blog/:blogId",
+          element: <BlogPostPage />
         }
       ]
     }

@@ -1,7 +1,9 @@
-const BlogPostCard = ({post: {_id, title, content }}) => {
+import { Link } from "react-router-dom";
+
+const BlogPostCard = ({ post: {_id, title, content } }) => {
 
     
-        const contentSliced = content.slice(0, 120);
+    const contentSliced = content.slice(0, 120);
 
     return (
         <>
@@ -11,9 +13,12 @@ const BlogPostCard = ({post: {_id, title, content }}) => {
             <p className="blog-post__content">
             {content.length > 120 ? `${contentSliced}...` : content}
             </p>
-            <button className="blog-post__button">
+            {/* <button className="blog-post__button">
                 READ MORE
-            </button>
+            </button> */}
+            <Link className="blog-post__link" to={`/blog/${_id}`}>
+                READ MORE
+            </Link>
         </li>
         </>
     )

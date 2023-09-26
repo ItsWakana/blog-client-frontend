@@ -88,16 +88,21 @@ ul.blog-list {
   font-size: .8rem;
 }
 
-.blog-post__button {
+.blog-post__button,
+.blog-post__link {
   background-color: var(--secondary-clr);
   padding: 10px 15px;
   border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
   border: none;
+  text-decoration: none;
+  color: black;
+  font-size: 0.8rem;
 }
 
-.blog-post__button:hover {
+.blog-post__button:hover,
+.blog-post__link:hover {
   background-color: rgb(255, 185, 56);
 }
 
@@ -105,6 +110,12 @@ h1 {
   text-align: center;
   color: white;
 }
+
+.welcome-header {
+  font-size: 0.9rem;
+  padding: 15px 0px;
+}
+
 .form-wrapper {
   display: flex;
   justify-content: center;
