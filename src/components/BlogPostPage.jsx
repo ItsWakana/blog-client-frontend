@@ -8,7 +8,18 @@ const BlogPostPage = () => {
 
     const [blogData, error, isLoading] = useBlogPageInfo(postId);
 
-    return <h1>{isLoading ? '' : blogData.title}</h1>;
+    return (
+        <div className="post-wrapper">
+            {isLoading ? (
+                <div className="loading-spinner"></div>
+            ) : (
+                <>
+                    <h1>{blogData.title}</h1>
+                    <p>{blogData.content}</p>
+                </>
+            )}
+        </div>
+    );
 }
 
 export default BlogPostPage;

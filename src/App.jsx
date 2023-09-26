@@ -1,5 +1,5 @@
 import BlogList from "./components/BlogList";
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
 import { useState } from "react";
@@ -13,6 +13,7 @@ function App() {
   const validateLogin = async (username, password) => {
     const response = await fetch("http://localhost:3000/api/sign-in", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -38,7 +39,6 @@ function App() {
     const { user } = await userResponse.json();
     setCurrentUser(user);
     setIsLoggedIn(true);
-    console.log(user);
   }
 
   const router = createBrowserRouter([
