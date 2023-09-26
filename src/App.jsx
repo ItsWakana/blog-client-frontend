@@ -54,7 +54,7 @@ function App() {
           element: <Login validateLogin={validateLogin} isLoggedIn={isLoggedIn}/>
         },
         {
-          path: "/blog/:blogId",
+          path: "/posts/:postId",
           element: <BlogPostPage />
         }
       ]

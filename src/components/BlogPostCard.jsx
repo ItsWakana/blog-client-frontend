@@ -16,7 +16,7 @@ const BlogPostCard = ({ post: {_id, title, content } }) => {
             {/* <button className="blog-post__button">
                 READ MORE
             </button> */}
-            <Link className="blog-post__link" to={`/blog/${_id}`}>
+            <Link className="blog-post__link" to={`/posts/${_id}`}>
                 READ MORE
             </Link>
         </li>
