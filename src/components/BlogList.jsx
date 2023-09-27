@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import useBlogPosts from "../../hooks/useBlogPosts"
 import BlogPostCard from "./BlogPostCard";
 
-const BlogList = ({ currentUser, isLoggedIn }) => {
+const BlogList = ({ currentUser, isLoggedIn, cookies }) => {
 
     const [blogPosts, error, isLoading] = useBlogPosts();
     
+    // useEffect(() => {
+    //     const jwtValue = cookies.get("token");
+    //     console.log(jwtValue);
+    //    },[]);
+
     return (
         <>
         {isLoggedIn && (

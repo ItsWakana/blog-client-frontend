@@ -2,29 +2,37 @@ import BlogList from "./components/BlogList";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlogPostPage from "./components/BlogPostPage";
+import Cookies from "universal-cookie";
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const validateLogin = async (username, password) => {
-    const response = await fetch("http://localhost:3000/api/sign-in", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password})
-    });
+  const [jwtToken, setJwtToken] = useState(null);
 
-    if (response.status !== 200) {
-      console.log("invalid login");
-      return;
+  const cookies = new Cookies();
+
+  useEffect(() => {
+
+    const checkAndFetchUser = async () => {
+
+      const jwtValue = cookies.get("token");
+      if (jwtValue) {
+        setJwtToken(jwtValue);
+
+        const fetchedUserInfo = await getUserInfo(jwtValue);
+        setCurrentUser(fetchedUserInfo);
+        setIsLoggedIn(true);
+      }
     }
-    const { token } = await response.json();
+
+    checkAndFetchUser();
+  },[]);
+
+  const getUserInfo = async (token) => {
 
     const userResponse = await fetch("http://localhost:3000/api/me", {
       method: "POST",
@@ -33,21 +41,48 @@ function App() {
       }
     });
 
-    if (response.status !== 200) {
-      console.log(`Error code:${response.status}. Issue logging in`);
+    if (userResponse.status !== 200) {
+      console.log(`Error code:${userResponse.status}. Issue logging in`);
     }
     const { user } = await userResponse.json();
-    setCurrentUser(user);
+
+
+    return user; 
+  }
+
+  const validateLogin = async (username, password) => {
+    
+    const response = await fetch("http://localhost:3000/api/sign-in", {
+        method: "POST",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password})
+      });
+
+    if (response.status !== 200) {
+      console.log("invalid login");
+      return;
+    }
+    const { token } = await response.json();
+
+    cookies.set("token", token, {
+      expires: new Date(Date.now() + 10 * 60 * 1000)
+    });
+
+    const fetchedUserInfo = await getUserInfo(token);
+    setCurrentUser(fetchedUserInfo);
     setIsLoggedIn(true);
   }
 
   const router = createBrowserRouter([
     {
-      element: <Layout />,
+      element: <Layout isLoggedIn={isLoggedIn}/>,
       children: [
         {
           path: "/",
-          element: <BlogList currentUser={currentUser} isLoggedIn={isLoggedIn}/>
+          element: <BlogList currentUser={currentUser} isLoggedIn={isLoggedIn} cookies={cookies}/>
         },
         {
           path: "/login",
@@ -60,25 +95,6 @@ function App() {
       ]
     }
   ]);
-  // "username": "jimmyjames2", "password": "jimmy167"
-
-  //SET SOME STATE FOR THE POSTS. WE COULD ALSO MAKE A HOOK HERE INSTEAD.
-
-    // const getAuthToken = async () => {
-    //   const response = await fetch("http://localhost:3000/api/sign-in", {
-    //     method: 'POST',
-    //     headers: {
-    //       "Content-Type": 'application/json',
-    //     },
-    //     body: JSON.stringify({ username: "jimmyjames2", password: "jimmy167" })
-    //   });
-    //   const token = await response.json();
-    // }
-
-    //WORK ON FETCHING THE BLOG POSTS. WE SHOULD PROBABLY OPEN UP THE POSTS ROUTE TO ANYTHING SO WE DONT NEED ANY SIGN INS. THIS WAY USERS WHO ARENT LOGGED IN CAN STILL VIEW THE BLOG POSTS.
-    
-    //FOR NOW WE CAN LEAVE CORS OPEN, UNTIL THIS GOES INTO PRODUCTION.
-
 
   return (
     <RouterProvider router={router}/>
