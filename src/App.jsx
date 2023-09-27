@@ -11,8 +11,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [jwtToken, setJwtToken] = useState(null);
-
   const cookies = new Cookies();
 
   useEffect(() => {
@@ -21,8 +19,6 @@ function App() {
 
       const jwtValue = cookies.get("token");
       if (jwtValue) {
-        setJwtToken(jwtValue);
-
         const fetchedUserInfo = await getUserInfo(jwtValue);
         setCurrentUser(fetchedUserInfo);
         setIsLoggedIn(true);
