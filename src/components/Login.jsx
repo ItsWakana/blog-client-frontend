@@ -6,8 +6,9 @@ const Login = ({ validateLogin, isLoggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -15,14 +16,16 @@ const Login = ({ validateLogin, isLoggedIn }) => {
         }
     },[isLoggedIn, navigate]);
     
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-
+        
         if (!username || !password) {
             console.log("Invalid login")
             return;
         }
-        validateLogin(username, password);
+        setIsLoading(true);
+        await validateLogin(username, password);
+        setIsLoading(false);
     }
 
     return (
@@ -39,8 +42,9 @@ const Login = ({ validateLogin, isLoggedIn }) => {
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" value={password}onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
-                <button type="submit">Sign In</button>
+                <button type="submit" disabled={isLoading}>Sign In</button>
                 <p>Dont have an account? <a className="sign-up" href="/sign-up">Sign up</a></p>
+                {isLoading && <div className="loading-spinner"></div>}
             </form>
         </div>
         </>

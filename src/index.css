@@ -126,13 +126,19 @@ h1 {
 .sign-up-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
   gap: 20px;
   width: 25%;
   min-width: 230px;
 }
 
-.sign-up-form > div {
+.sign-up-form button {
+  width: 100%;
+}
+
+.sign-up-form > div:not(.loading-spinner) {
+  width: 100%;
   position: relative;
 }
 
@@ -182,8 +188,12 @@ button {
   color: white;
   font-weight: bold;
   padding: 12px;
+  transition: all 150ms ease-in;
 }
 
+button:disabled {
+  background: gray;
+}
 button a {
   text-decoration: none;
   color: white;
