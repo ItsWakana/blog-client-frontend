@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 
-const Layout = ({ isLoggedIn }) => {
+const Layout = ({ isLoggedIn, handleLogOut }) => {
 
     return (
         <>
@@ -9,7 +9,16 @@ const Layout = ({ isLoggedIn }) => {
                     <Link className="nav-link" to="/">Home</Link>
                 </li>
                 <li>
-                    <Link className="nav-link" to="/login">{isLoggedIn ? 'LOGOUT' : 'LOG IN'}</Link>
+                    {isLoggedIn ? (
+                        <Link className="nav-link" to="/login"
+                        onClick={handleLogOut}>
+                            LOG OUT
+                        </Link>
+                    ) : (
+                        <Link className="nav-link" to="/login">
+                            LOG IN
+                        </Link>
+                    )}
                     <Link className="nav-link" to="/">About</Link>
                 </li>
             </ul>

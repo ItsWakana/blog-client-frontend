@@ -45,12 +45,20 @@ const useAuth = (cookies) => {
         const fetchedUserInfo = await getUserInfo(token);
         setCurrentUser(fetchedUserInfo);
         setIsLoggedIn(true);
-      }
+    }
+
+    const handleLogOut = () => {
+        cookies.remove("token");
+
+        setCurrentUser(null);
+        setIsLoggedIn(false);
+    }
 
     return {
         currentUser,
         isLoggedIn,
-        validateLogin
+        validateLogin,
+        handleLogOut
     }
 }
 

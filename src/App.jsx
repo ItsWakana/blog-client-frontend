@@ -13,12 +13,13 @@ function App() {
   const {
     currentUser,
     isLoggedIn,
-    validateLogin
+    validateLogin,
+    handleLogOut
   } = useAuth(cookies);
 
   const router = createBrowserRouter([
     {
-      element: <Layout isLoggedIn={isLoggedIn}/>,
+      element: <Layout isLoggedIn={isLoggedIn} handleLogOut={handleLogOut}/>,
       children: [
         {
           path: "/",
