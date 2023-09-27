@@ -25,7 +25,7 @@ const useAuth = (cookies) => {
     
         const response = await fetch("http://localhost:3000/api/sign-in", {
             method: "POST",
-            // credentials: "include",
+            credentials: "include",
             headers: {
               "Content-Type": "application/json"
             },
@@ -47,8 +47,14 @@ const useAuth = (cookies) => {
         setIsLoggedIn(true);
     }
 
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
         cookies.remove("token");
+
+        // await fetch("http://localhost:3000/api/sign-out", {
+        //     method: "POST",
+        //     credentials: "include",
+
+        // });
 
         setCurrentUser(null);
         setIsLoggedIn(false);
