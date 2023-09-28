@@ -47,6 +47,10 @@ const useAuth = (cookies) => {
         setIsLoggedIn(true);
     }
 
+    const validateUserComment = (comment) => {
+
+    }
+
     const handleLogOut = async () => {
         cookies.remove("token");
 
@@ -64,7 +68,8 @@ const useAuth = (cookies) => {
         currentUser,
         isLoggedIn,
         validateLogin,
-        handleLogOut
+        handleLogOut,
+        validateUserComment
     }
 }
 

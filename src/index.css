@@ -133,24 +133,24 @@ h1 {
   min-width: 230px;
 }
 
-.sign-up-form button {
+form button {
   width: 100%;
 }
 
-.sign-up-form > div:not(.loading-spinner) {
+form > div:not(.loading-spinner) {
   width: 100%;
   position: relative;
 }
 
-.sign-up-form > p {
+form > p {
   color: white;
 }
 
-.sign-up-form a {
+form a {
   color: var(--secondary-clr);
 }
 
-.sign-up-form > div label {
+form > div label {
   position: absolute;
   top: 3px;
   font-size: .7rem;
