@@ -29,7 +29,7 @@ const useBlogPageInfo = (postId) => {
 
     },[]);
 
-    return [ blogItem, error, isLoading ];
+    return { blogItem, error, isLoading };
 
 }
 

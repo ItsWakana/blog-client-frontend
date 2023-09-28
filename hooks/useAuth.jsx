@@ -50,18 +50,24 @@ const useAuth = (cookies) => {
 
     const validateUserComment = async (comment, blogData) => {
 
-      const response = await fetch(`http://localhost:3000/api/posts/${blogData._id}/comments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${cookies.get("token")}`
-        },
-        body: JSON.stringify({ comment, blogData })
-      });
+      try {
+        const response = await fetch(`http://localhost:3000/api/posts/${blogData._id}/comments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${cookies.get("token")}`
+          },
+          body: JSON.stringify({ comment, blogData })
+        });
 
-      const data = await response.json();
-      console.log(data);
-      
+        const newComment = await response.json();
+
+        return newComment;
+
+      } catch(error) {
+        console.log(error);
+      }
+
     }
 
     const handleLogOut = async () => {

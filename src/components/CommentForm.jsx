@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-const CommentForm = ({ currentUser, validateUserComment, blogData }) => {
+const CommentForm = ({ currentUser, validateUserComment, blogItem }) => {
 
     const [messageInput, setMessageInput] = useState('');
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
 
-        validateUserComment(messageInput, blogData);
+        validateUserComment(messageInput, blogItem);
     }
 
     return (
