@@ -5,7 +5,8 @@ const useAuth = (cookies) => {
 
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+    // const [jwtToken, setjwtToken] = useState(null);
+
     useEffect(() => {
   
       const checkAndFetchUser = async () => {
@@ -25,7 +26,7 @@ const useAuth = (cookies) => {
     
         const response = await fetch("http://localhost:3000/api/sign-in", {
             method: "POST",
-            credentials: "include",
+            // credentials: "include",
             headers: {
               "Content-Type": "application/json"
             },
@@ -47,8 +48,20 @@ const useAuth = (cookies) => {
         setIsLoggedIn(true);
     }
 
-    const validateUserComment = (comment) => {
+    const validateUserComment = async (comment, blogData) => {
 
+      const response = await fetch(`http://localhost:3000/api/posts/${blogData._id}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookies.get("token")}`
+        },
+        body: JSON.stringify({ comment, blogData })
+      });
+
+      const data = await response.json();
+      console.log(data);
+      
     }
 
     const handleLogOut = async () => {

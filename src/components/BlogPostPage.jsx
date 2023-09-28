@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useBlogPageInfo from "../../hooks/useBlogPageInfo";
 import CommentForm from "./CommentForm";
+import { useState } from "react";
 
 const BlogPostPage = ({ isLoggedIn, currentUser, validateUserComment }) => {
 
@@ -20,8 +21,18 @@ const BlogPostPage = ({ isLoggedIn, currentUser, validateUserComment }) => {
 
                     </div>
                     {isLoggedIn && (
-                        <CommentForm validateUserComment={validateUserComment} currentUser={currentUser}/>
+                        <CommentForm validateUserComment={validateUserComment} currentUser={currentUser} blogData={blogData}/>
                     )}
+                    <h2>Comments</h2>
+                    <ul className="comment-list">
+                        {blogData.comments.map((comment) => (
+                            <li className="comment-list__comment" key={comment._id}>
+                                <p>{comment.author.name}</p>
+                                <p>{comment.content}</p>
+                                <p>{comment.createdAt}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </>
             )}
         </div>

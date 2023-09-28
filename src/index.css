@@ -168,6 +168,21 @@ form textarea {
   width: 100%;
 }
 
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.comment-list__comment {
+  width: 50%;
+  padding: 20px;
+  border-radius: 8px;
+  background: black;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
