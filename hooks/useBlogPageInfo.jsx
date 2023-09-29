@@ -20,7 +20,9 @@ const useBlogPageInfo = (postId) => {
                 const blogData = await response.json();
                 setIsLoading(false);
                 setBlogItem(blogData);
-                setComments(blogData.comments);
+                const sortedComments = blogData.comments.toSorted((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                setComments(sortedComments);
             } catch(err) {
                 setError(err);
             }
