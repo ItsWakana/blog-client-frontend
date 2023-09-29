@@ -7,7 +7,7 @@ const BlogPostPage = ({ isLoggedIn, currentUser, validateUserComment }) => {
 
     const { postId } = useParams();
 
-    const { blogItem, error, isLoading, postComments, setPostComments } = useBlogPageInfo(postId);
+    const { blogItem, error, isLoading, comments, setComments } = useBlogPageInfo(postId);
 
     return (
         <div className="post-wrapper">
@@ -17,7 +17,7 @@ const BlogPostPage = ({ isLoggedIn, currentUser, validateUserComment }) => {
                 <>
                     <h1>{blogItem.title}</h1>
                     <p>{blogItem.content}</p>
-                    <CommentSection isLoggedIn={isLoggedIn} currentUser={currentUser} validateUserComment={validateUserComment} blogItem={blogItem}/>
+                    <CommentSection isLoggedIn={isLoggedIn} currentUser={currentUser} validateUserComment={validateUserComment} blogItem={blogItem} comments={comments} setComments={setComments}/>
                 </>
             )}
         </div>

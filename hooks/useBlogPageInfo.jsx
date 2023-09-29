@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 const useBlogPageInfo = (postId) => {
 
     const [blogItem, setBlogItem] = useState(null);
+    const [comments, setComments] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -19,6 +20,7 @@ const useBlogPageInfo = (postId) => {
                 const blogData = await response.json();
                 setIsLoading(false);
                 setBlogItem(blogData);
+                setComments(blogData.comments);
             } catch(err) {
                 setError(err);
             }
@@ -29,7 +31,7 @@ const useBlogPageInfo = (postId) => {
 
     },[]);
 
-    return { blogItem, error, isLoading };
+    return { blogItem, error, isLoading, comments, setComments };
 
 }
 

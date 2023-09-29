@@ -4,16 +4,22 @@ const CommentSection = ({
     isLoggedIn, 
     currentUser, 
     validateUserComment, 
-    blogItem 
+    blogItem,
+    comments,
+    setComments
 }) => {
 
+    //WE COULD CREATE A USEMESSAGE HOOK THAT TAKES IN THE MESSAGE INPUT AND ALSO THE HANDLE CLICK METHOD, 
     const [messageInput, setMessageInput] = useState('');
+    const [messageLoading, setMessageLoading] = useState(false);
 
     const handleClick = async (e) => {
+        setMessageLoading(true);
         e.preventDefault();
         //Attemps to POST request message into the database.
         const newUserComment = await validateUserComment(messageInput, blogItem);
-        console.log(newUserComment);
+        setMessageLoading(false);
+        setComments((prevComments) => [...prevComments, newUserComment]);
     }
 
     return (
@@ -30,13 +36,17 @@ const CommentSection = ({
         )}
         <h2>Comments</h2>
         <ul className="comment-list">
-            {blogItem.comments.map((comment) => (
-                <li className="comment-list__comment" key={comment._id}>
-                    <p>{comment.author.name}</p>
-                    <p>{comment.content}</p>
-                    <p>{comment.createdAt}</p>
-                </li>
-            ))}
+            {messageLoading ? (
+                <div className="loading-spinner"></div>
+            ) : (
+                comments.map((comment) => (
+                    <li className="comment-list__comment" key={comment._id}>
+                        <p>{comment.author.name}</p>
+                        <p>{comment.content}</p>
+                        <p>{comment.createdAt}</p>
+                    </li>
+                ))
+            )}
         </ul>
         </>
     )

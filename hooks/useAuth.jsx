@@ -59,7 +59,6 @@ const useAuth = (cookies) => {
           },
           body: JSON.stringify({ comment, blogData })
         });
-
         const newComment = await response.json();
 
         return newComment;
