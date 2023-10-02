@@ -19,7 +19,12 @@ const CommentSection = ({
         //Attemps to POST request message into the database.
         const newUserComment = await validateUserComment(messageInput, blogItem);
         setMessageLoading(false);
-        setComments((prevComments) => [...prevComments, newUserComment]);
+
+        setComments((prevComments) => {
+            const newComments = [...prevComments, newUserComment];
+
+            return newComments.toSorted((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        });
     }
 
     return (
