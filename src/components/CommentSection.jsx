@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatDistance, parseISO } from "date-fns";
 
 const CommentSection = ({ 
     isLoggedIn, 
@@ -48,7 +49,7 @@ const CommentSection = ({
                     <li className="comment-list__comment" key={comment._id}>
                         <p>{comment.author.name}</p>
                         <p>{comment.content}</p>
-                        <p>{comment.createdAt}</p>
+                        <p>{formatDistance(parseISO(comment.createdAt), new Date())} ago</p>
                     </li>
                 ))
             )}
