@@ -168,6 +168,16 @@ form textarea {
   width: 100%;
 }
 
+.login-tooltip {
+
+  background: rgb(247, 230, 86);
+  padding: 7px 12px;
+  border-radius: 4px;
+  color: black;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
 .comment-list {
   display: flex;
   flex-direction: column;

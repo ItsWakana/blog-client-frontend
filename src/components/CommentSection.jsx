@@ -30,7 +30,7 @@ const CommentSection = ({
 
     return (
         <>
-        {isLoggedIn && (
+        {isLoggedIn ? (
             <form onSubmit={handleClick} action="" method="POST">
                 <div>
                     <label htmlFor="comment">{`Commenting as ${currentUser.name}`}</label>
@@ -39,6 +39,8 @@ const CommentSection = ({
                 </div>
                 <button type="submit">Add comment</button>
             </form>
+        ) : (
+            <div className="login-tooltip">Log in to leave a comment!</div>
         )}
         <h2>Comments</h2>
         <ul className="comment-list">
