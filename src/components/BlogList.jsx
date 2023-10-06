@@ -6,11 +6,7 @@ const BlogList = ({ currentUser, isLoggedIn, cookies }) => {
 
     const [blogPosts, error, isLoading] = useBlogPosts();
     
-    // useEffect(() => {
-    //     const jwtValue = cookies.get("token");
-    //     console.log(jwtValue);
-    //    },[]);
-
+    console.log(blogPosts);
     return (
         <>
         {isLoggedIn && (
@@ -21,9 +17,13 @@ const BlogList = ({ currentUser, isLoggedIn, cookies }) => {
         ) : (
             <div className="main-blog">
                 <ul className="blog-list">
-                    {blogPosts.map((post) => (
+                    {/* {blogPosts.map((post) => (
                         <BlogPostCard key={post._id} post={post}
                         currentUser={currentUser} isLoggedIn={isLoggedIn}/>
+                    ))} */}
+
+                    {blogPosts.filter((post) => post.published.isPublished).map((p) => (
+                        <BlogPostCard key={p._id} post={p} currentUser={currentUser} isLoggedIn={isLoggedIn}/>
                     ))}
                 </ul>
             </div>
