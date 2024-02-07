@@ -15,6 +15,18 @@ body {
   --card-border-clr: rgb(46, 46, 46);
 }
 
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+p {
+  letter-spacing: .2px;
+  line-height: 1.5;
+}
 ul {
   padding: 0;
   margin: 0;
